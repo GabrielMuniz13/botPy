@@ -1,11 +1,10 @@
 from selenium import webdriver
 
 # Especifique o caminho para o Chromedriver
-chromedriver_path = '/chromedriver.exe'
 
 # Configurar as opções do Chrome
 chrome_options = webdriver.ChromeOptions()
-# chrome_options.add_argument('--headless')  # Execute o Chrome em modo headless (sem interface gráfica)
+chrome_options.add_argument('--headless')  # Execute o Chrome em modo headless (sem interface gráfica)
 
 # Iniciar o navegador Chrome
 driver = webdriver.Chrome( options=chrome_options)

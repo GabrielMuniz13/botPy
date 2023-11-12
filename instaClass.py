@@ -36,10 +36,11 @@ class InstaBot:
             time.sleep(2)
         except:
             print('deu ruim')
-    def msg(self, messagem):
+    def msg(self, messagem, hora):
         try:
+            msg = hora+" "+messagem
             self.webdriver.get(self.url)
             time.sleep(8)
-            self.webdriver.find_element(*self.inputMsg).send_keys(messagem, Keys.RETURN)
+            self.webdriver.find_element(*self.inputMsg).send_keys(msg, Keys.RETURN)
         except:
             print('deu ruim')
