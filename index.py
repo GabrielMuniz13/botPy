@@ -1,19 +1,28 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.options import Options
 import time
 from datetime import datetime
 import requests
+import chromedriver_autoinstaller
 
+# Garante que o chromedriver está instalado na versão correta
+chromedriver_autoinstaller.install()
+
+# Configurar as opções do Chrome, se necessário
+chrome_options = webdriver.ChromeOptions()
+# Adicione opções adicionais, se necessário
+chrome_options.add_argument('--headless')
+chrome_options.add_argument('--verbose')
+chrome_options.add_argument('--disable-gpu')
+chrome_options.add_argument('--no-sandbox')
+# chrome_options.binary_location = "/usr/bin/google-chrome"
 
 def bot():
     try:
         email = 'daniel.sousa@grupobrisanet.com.br'
         password = '008Force'
         placa = 'RIH5G34'
-
-        chrome_options = Options()
-        chrome_options.add_argument("-headless")
+        
         
         # chrome_options = webdriver.ChromeOptions()
         # chrome_options.add_argument('--headless')                                                     
