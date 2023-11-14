@@ -12,11 +12,11 @@ def bot():
         password = '008Force'
         placa = 'RIH5G34'
 
-        # chrome_options = Options()
-        # chrome_options.add_argument("-headless")
+        chrome_options = Options()
+        chrome_options.add_argument("-headless")
         
-        chrome_options = webdriver.ChromeOptions()
-        chrome_options.add_argument('--headless')                                                     
+        # chrome_options = webdriver.ChromeOptions()
+        # chrome_options.add_argument('--headless')                                                     
         driver = webdriver.Chrome(options = chrome_options)
         # driver = webdriver.Chrome()
         driver.get('https://webapp.agilitymonitoramento.com.br')
@@ -36,7 +36,7 @@ def bot():
         driver.close()
         return location
     except:
-        print('error', )
+        print('error')
 
 bot_token = '6666531730:AAEWtUViScI8FSokfMCVlrvPeXRWHr_gouo'
 chat_id = '-4050264337'
