@@ -6,7 +6,7 @@ import requests
 import chromedriver_autoinstaller
 
 # Garante que o chromedriver está instalado na versão correta
-chromedriver_autoinstaller.install()
+# chromedriver_autoinstaller.install()
 
 # Configurar as opções do Chrome, se necessário
 chrome_options = webdriver.ChromeOptions()
