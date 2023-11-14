@@ -7,7 +7,7 @@ chromedriver_autoinstaller.install()
 # Configurar as opções do Chrome, se necessário
 chrome_options = webdriver.ChromeOptions()
 # Adicione opções adicionais, se necessário
-
+chrome_options.add_argument('--headless')
 # Inicializar o driver do Chrome
 driver = webdriver.Chrome(options=chrome_options)
 driver.get("https://www.google.com")
