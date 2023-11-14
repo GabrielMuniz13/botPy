@@ -64,7 +64,7 @@ while(True):
     mensagem = local
     resposta = enviar_mensagem_grupo(bot_token, chat_id, mensagem)
     print(resposta)
-    time.sleep(60)
+    time.sleep(600)
     
 
 
