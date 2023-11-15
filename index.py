@@ -3,14 +3,14 @@ from selenium.webdriver.common.by import By
 import time
 from datetime import datetime
 import requests
-import chromedriver_autoinstaller
 
-# Garante que o chromedriver está instalado na versão correta
-# chromedriver_autoinstaller.install()
+bot_token = '6666531730:AAEWtUViScI8FSokfMCVlrvPeXRWHr_gouo'
+chat_id = '-1002009679647'
+espera = 550
+horaInicio = 7
+horaFim = 24
 
-# Configurar as opções do Chrome, se necessário
 chrome_options = webdriver.ChromeOptions()
-# Adicione opções adicionais, se necessário
 chrome_options.add_argument('--headless')
 chrome_options.add_argument('--verbose')
 chrome_options.add_argument('--disable-gpu')
@@ -22,58 +22,63 @@ def bot():
         email = 'daniel.sousa@grupobrisanet.com.br'
         password = '008Force'
         placa = 'RIH5G34'
-        
-        
-        # chrome_options = webdriver.ChromeOptions()
-        # chrome_options.add_argument('--headless')                                                     
-        driver = webdriver.Chrome(options = chrome_options)
-        # driver = webdriver.Chrome()
+                                                         
+        driver = webdriver.Chrome(options=chrome_options)
         driver.get('https://webapp.agilitymonitoramento.com.br')
-        time.sleep(8)
+        time.sleep(15)
         driver.find_element(By.XPATH, '//*[@id="txtUsername"]/div/div[1]/input').send_keys(email)
         driver.find_element(By.XPATH, '//*[@id="txtSenha"]/div/div[1]/input').send_keys(password)
         driver.find_element(By.XPATH, '//*[@id="btnSenha"]/div').click()
         driver.find_element(By.XPATH, '//*[@id="Menu_1"]').click()
-        time.sleep(5)
+        time.sleep(15)
         driver.find_element(By.XPATH, '//*[@id="GridInternaIdgridRecipienteRastreamento"]/div/div[5]/div[1]/table/tbody/tr[2]/td[5]/div/div[2]/div/div/div[1]/input').send_keys(placa)
-        time.sleep(2)
-        driver.find_element(By.XPATH, '//*[@id="GridInternaIdgridRecipienteRastreamento"]/div/div[6]/div[2]/table/tbody/tr[1]/td[5]').click()
-        time.sleep(2)
-        driver.find_element(By.XPATH, '//*[@id="UnidadeRastreada"]/a/i').click()
         time.sleep(3)
+        driver.find_element(By.XPATH, '//*[@id="GridInternaIdgridRecipienteRastreamento"]/div/div[6]/div[2]/table/tbody/tr[1]/td[5]').click()
+        time.sleep(3)
+        driver.find_element(By.XPATH, '//*[@id="UnidadeRastreada"]/a/i').click()
+        time.sleep(15)
         location = driver.find_element(By.XPATH, '//*[@id="localizacao"]').text
         driver.close()
         return location
     except:
         print('error')
-
-bot_token = '6666531730:AAEWtUViScI8FSokfMCVlrvPeXRWHr_gouo'
-chat_id = '-4050264337'
+        return -1
 
 def enviar_mensagem_grupo(bot_token, chat_id, mensagem):
     url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
     params = {
         'chat_id': chat_id,
-        'text': mensagem
+        'text': mensagem,
+        'parse_mode': 'HTML'
     }
 
     response = requests.post(url, params=params)
     return response.json()
 
-
-esperaa = 120
-espera = 1200
-
-while(True):
+def active():
     hora_atual = datetime.now()
-    hora_formatada = hora_atual.strftime("%H:%M:%S")      
-    local = bot()
-    print(local)
-    print(hora_formatada)
-    mensagem = local
-    resposta = enviar_mensagem_grupo(bot_token, chat_id, mensagem)
-    print(resposta)
-    time.sleep(600)
-    
+    hora = int(hora_atual.strftime("%H"))
+    if(hora>=horaInicio and hora<=horaFim):
+        return True
+    else:
+        return False
+while(True):
+    while(active()):
+        msg = bot()
+        if(msg!=-1):
+            link = 'https://www.google.com/maps/search/'
+            link = link+msg
 
+            msg = f'<b>{msg}</b>'
+            msg = msg.upper()
+            link = f'<a href="{link}">Abrir no maps</a>'
+            
+            resposta1 = enviar_mensagem_grupo(bot_token, chat_id, msg)
+            # resposta2 = enviar_mensagem_grupo(bot_token, chat_id, link)
+            print(resposta1)
+            # espera de 10 minutos
+            time.sleep(espera)
+        else:
+            time.sleep(1)
+    time.sleep(1)
 
