@@ -8,7 +8,7 @@ bot_token = '6666531730:AAEWtUViScI8FSokfMCVlrvPeXRWHr_gouo'
 chat_id = '-1002009679647'
 espera = 550
 horaInicio = 7
-horaFim = 24
+horaFim = 19
 
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument('--headless')
@@ -41,7 +41,7 @@ def bot():
         driver.close()
         return location
     except:
-        print('error')
+        print('error: locations')
         return -1
 
 def enviar_mensagem_grupo(bot_token, chat_id, mensagem):
@@ -67,6 +67,7 @@ while(True):
     while(active()):
         msg = bot()
         if(msg!=-1):
+            print(msg)
             link = 'https://www.google.com/maps/search/'
             link = link+msg
 
