@@ -57,7 +57,7 @@ def enviar_mensagem_grupo(bot_token, chat_id, mensagem):
 
 def active():
     hora_atual = datetime.now()
-    hora = int(hora_atual.strftime("%H"))s
+    hora = int(hora_atual.strftime("%H"))
     print(hora)
     if(hora>=horaInicio and hora<=horaFim):
         return True
